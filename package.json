@@ -1,0 +1,29 @@
+{
+  "name": "extension",
+  "version": "1.0.0",
+  "description": "movie-web extension, allows providers to work without proxy",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "build:firefox": "vite build",
+    "build:chrome": "vite build",
+    "test": "vitest run",
+    "lint": "eslint --ext .tsx,.ts src",
+    "lint:fix": "eslint --fix --ext .tsx,.ts src",
+    "lint:report": "eslint --ext .tsx,.ts --output-file eslint_report.json --format json src",
+    "preinstall": "npx -y only-allow pnpm"
+  },
+  "keywords": [],
+  "author": "movie-web",
+  "license": "MIT",
+  "dependencies": {
+    "vite": "^5.0.10"
+  },
+  "devDependencies": {
+    "@types/lodash.merge": "^4.6.9",
+    "@types/node": "^20.10.5",
+    "lodash.merge": "^4.6.2",
+    "vite-plugin-static-copy": "^1.0.0"
+  }
+}

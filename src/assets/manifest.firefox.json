@@ -1,0 +1,10 @@
+{
+  "background": {
+    "scripts": ["index.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "extension-firefox@movie-web.app"
+    }
+  }
+}

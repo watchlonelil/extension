@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2021",
+    "lib": ["es2021", "DOM"],
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true,
+    "baseUrl": "src",
+    "experimentalDecorators": true,
+    "isolatedModules": false,
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}
