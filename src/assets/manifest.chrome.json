@@ -1,5 +1,5 @@
 {
   "background": {
-    "service_worker": "index.js"
+    "service_worker": "worker.js"
   }
 }

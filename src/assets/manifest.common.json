@@ -10,7 +10,7 @@
     "default_title": "movie-web extension",
     "default_popup": "popup.html"
   },
-  "permissions": ["storage", "tabs", "cookies", "scripting"],
+  "permissions": ["declarativeNetRequest"],
   "host_permissions": ["<all_urls>"],
   "web_accessible_resources": [
     {

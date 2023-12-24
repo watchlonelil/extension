@@ -1,4 +1,4 @@
-import { resolve, sep } from 'path'
+import { resolve, dirname } from 'path'
 import { defineConfig } from 'vite'
 import { manifestMerge } from './plugins/manifest';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
@@ -19,12 +19,13 @@ export default defineConfig({
     viteStaticCopy({
       targets: staticAssets.map(file => ({
         src: resolve(__dirname, file),
-        dest: resolve(__dirname, file.replace(/^src/, 'dist')),
+        dest: dirname(resolve(__dirname, file.replace(/^src/, 'dist'))),
       }))
     })
   ],
   root: "src",
   build: {
+    emptyOutDir: true,
     minify: false,
     rollupOptions: {
       output: [{
