@@ -34,5 +34,10 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.1"
+  },
+  "manifest": {
+    "permissions": [
+      "declarativeNetRequest"
+    ]
   }
 }
