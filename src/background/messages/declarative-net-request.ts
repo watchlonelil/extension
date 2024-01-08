@@ -29,7 +29,9 @@ const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) =>
           },
           action: {
             type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
-            requestHeaders: mapHeadersToDeclarativeNetRequestHeaders(req.body.requestHeaders ?? {}),
+            ...(req.body.requestHeaders && {
+              requestHeaders: mapHeadersToDeclarativeNetRequestHeaders(req.body.requestHeaders),
+            }),
             responseHeaders: [
               {
                 header: 'Access-Control-Allow-Origin',
