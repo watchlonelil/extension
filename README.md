@@ -2,41 +2,28 @@
 
 movie-web extension, allows providers to work without proxy
 
-## How this will likely work on the app
+## Components
 
-**On mp4 streaming:**
-1. movie-web application will send the following to the extension:
-   - full specific URL for streaming URL
-   - preferred headers for the streaming URL
-2. extension will set rules for the specific URL:
-   - CORS headers, allow cross origin
-   - Set preferred headers sent by app
+1. Messaging
+  - `makeRequest` message. Make requests that ignore CORS and can set forbidden headers. Replies with request results.
+  - `prepareStream` message. For a list of domains, set required or preferred headers.
+  - `clearStream` message. Clear any streaming header rules that were set.
+  - `hello` message. Gives details on the extension, like the version. If not allowed, simply respond with an error describing it.
 
-**On HLS streaming:**
-1. movie-web application will send the following to the extension:
-   - hostname for the streaming CDN
-   - preferred headers for the streaming CDN
-2. extension will set rules for the CDN hostname:
-   - CORS headers, allow cross origin
-   - Set preferred headers sent by app
+2. Popout
+  - The popout should have a simple interface for trusting or untrusting the current site. Only trusted sites should be able to communicate with the extension.
 
-**On scraping request:**
-1. movie-web application will send the following to the extension:
-   - url it will attempt to scrape
-   - list of headers it's planning on reading
-   - list of headers it should add
-2. extension will set rules for the list of URLS:
-   - CORS headers, allow cross origin
-   - set readable headers in CORS
-   - set the headers for sending the request
-3. extension will reply with the rule ID
-4. movie-web will execute the request
-5. movie-web will tell the extension to remove the rule with the rule ID
+3. Storage
+  - The extension will need to store active rules for setting headers. And which sites (origins) are trusted.
 
-## How will this work for other domains?
-- The popup will allow adding/removing the current tab domain to allowed domains list
-- The extension will not listen to any calls from disallowed domains
-- movie-web.app is default in the list of allowed domains
+## How will the client work
+1. When creating providers, first send a hello message to identify if there is an extension installed at all and if its correct version.
+2. If no extension (or not suitable) fallback on standard providers.
+3. Else, make new provider controls, target set to BROWSER_EXTENSION, with custom fetcher that uses the extension to send requests instead.
+4. If any message to the extension fail. Fallback to standard providers again.
+5. When a stream will be played, first communicate to extension through a `clearStream` followed by `prepareStream`
+
+# Plasmo
 
 ## Getting Started
 
