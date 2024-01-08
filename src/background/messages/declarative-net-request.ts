@@ -54,12 +54,10 @@ const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) =>
     });
 
     if (chrome.runtime.lastError?.message) throw new Error(chrome.runtime.lastError.message);
-    const currentRules = await chrome.declarativeNetRequest.getDynamicRules();
 
     res.send({
       success: true,
       body: req.body,
-      currentRules,
     });
   } catch (err) {
     res.send({
