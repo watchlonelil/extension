@@ -38,6 +38,9 @@
   "manifest": {
     "permissions": [
       "declarativeNetRequest"
+    ],
+    "host_permissions": [
+      "<all_urls>"
     ]
   }
 }

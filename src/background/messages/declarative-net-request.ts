@@ -18,7 +18,6 @@ const mapHeadersToDeclarativeNetRequestHeaders = (
 };
 
 const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) => {
-  console.log('declarative-net-request: ', req.body);
   try {
     await chrome.declarativeNetRequest.updateDynamicRules({
       removeRuleIds: [req.body.ruleId],
@@ -26,7 +25,7 @@ const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) =>
         {
           id: req.body.ruleId,
           condition: {
-            initiatorDomains: [req.body.domain],
+            requestDomains: [req.body.domain],
           },
           action: {
             type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
@@ -55,10 +54,12 @@ const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) =>
     });
 
     if (chrome.runtime.lastError?.message) throw new Error(chrome.runtime.lastError.message);
+    const currentRules = await chrome.declarativeNetRequest.getDynamicRules();
 
     res.send({
       success: true,
       body: req.body,
+      currentRules,
     });
   } catch (err) {
     res.send({
