@@ -1,16 +1,24 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 
-import type { BaseRequestBody } from '~types/request';
+import type { BaseRequest } from '~types/request';
+import type { BaseResponse } from '~types/response';
 import { validateDomainWhiteList } from '~utils/storage';
 
-interface RequestBody extends BaseRequestBody {
+interface Request extends BaseRequest {
   url: string;
   method: string;
   headers?: Record<string, string>;
   body?: string | FormData | URLSearchParams;
 }
 
-const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) => {
+type Response = BaseResponse<{
+  status: number;
+  requestHeaders: Record<string, string>;
+  responseHeaders: Record<string, string>;
+  data: string | Record<string, unknown>;
+}>;
+
+const handler: PlasmoMessaging.MessageHandler<Request, Response> = async (req, res) => {
   try {
     await validateDomainWhiteList(req.body.requestDomain);
 

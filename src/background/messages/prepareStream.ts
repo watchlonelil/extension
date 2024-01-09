@@ -1,10 +1,11 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 
+import type { BaseRequest } from '~types/request';
+import type { BaseResponse } from '~types/response';
 import { validateDomainWhiteList } from '~utils/storage';
 
-interface RequestBody {
+interface Request extends BaseRequest {
   ruleId: number;
-  hostDomain: string;
   targetDomains: [string, ...string[]];
   requestHeaders?: Record<string, string>;
   responseHeaders?: Record<string, string>;
@@ -20,9 +21,9 @@ const mapHeadersToDeclarativeNetRequestHeaders = (
   }));
 };
 
-const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) => {
+const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (req, res) => {
   try {
-    await validateDomainWhiteList(req.body.hostDomain);
+    await validateDomainWhiteList(req.body.requestDomain);
 
     await chrome.declarativeNetRequest.updateDynamicRules({
       removeRuleIds: [req.body.ruleId],
