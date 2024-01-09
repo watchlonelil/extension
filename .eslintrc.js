@@ -1,11 +1,8 @@
-/**
- * @type {import('eslint').Linter.Config}
- */
-export default {
+module.exports = {
   env: {
     browser: true,
   },
-  extends: ['airbnb-base', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   ignorePatterns: ['dist/*', 'plugins/*', 'tests/*', '/*.cjs', '/*.js', '/*.ts', '/**/*.test.ts', 'test/*'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -21,6 +18,10 @@ export default {
   },
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   rules: {
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 'off',
+    'react/destructuring-assignment': 'off',
     'no-underscore-dangle': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'no-console': 'off',
@@ -39,6 +40,7 @@ export default {
     'no-param-reassign': ['error', { props: false }],
     'prefer-destructuring': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.tsx', '.jsx'] }],
     'import/extensions': [
       'error',
       'ignorePackages',
