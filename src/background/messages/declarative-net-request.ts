@@ -1,5 +1,6 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
-import { domainIsInWhitelist, validateDomainWhiteList } from '~utils/storage';
+
+import { validateDomainWhiteList } from '~utils/storage';
 
 interface RequestBody {
   ruleId: number;

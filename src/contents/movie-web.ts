@@ -1,6 +1,5 @@
-import type { PlasmoCSConfig } from 'plasmo';
-
 import { relayMessage } from '@plasmohq/messaging';
+import type { PlasmoCSConfig } from 'plasmo';
 
 export const config: PlasmoCSConfig = {
   matches: ['<all_urls>'],
