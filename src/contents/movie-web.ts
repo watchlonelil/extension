@@ -6,9 +6,13 @@ export const config: PlasmoCSConfig = {
 };
 
 relayMessage({
-  name: 'proxy-request',
+  name: 'hello',
 });
 
 relayMessage({
-  name: 'declarative-net-request',
+  name: 'makeRequest',
+});
+
+relayMessage({
+  name: 'prepareStream',
 });

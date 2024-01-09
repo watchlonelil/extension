@@ -4,8 +4,8 @@ import { validateDomainWhiteList } from '~utils/storage';
 
 interface RequestBody {
   ruleId: number;
-  requestDomain: string;
-  domain: string;
+  hostDomain: string;
+  targetDomains: [string, ...string[]];
   requestHeaders?: Record<string, string>;
   responseHeaders?: Record<string, string>;
 }
@@ -22,7 +22,7 @@ const mapHeadersToDeclarativeNetRequestHeaders = (
 
 const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) => {
   try {
-    await validateDomainWhiteList(req.body.requestDomain);
+    await validateDomainWhiteList(req.body.hostDomain);
 
     await chrome.declarativeNetRequest.updateDynamicRules({
       removeRuleIds: [req.body.ruleId],
@@ -30,7 +30,7 @@ const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) =>
         {
           id: req.body.ruleId,
           condition: {
-            requestDomains: [req.body.domain],
+            requestDomains: req.body.targetDomains,
           },
           action: {
             type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
@@ -64,7 +64,6 @@ const handler: PlasmoMessaging.MessageHandler<RequestBody> = async (req, res) =>
 
     res.send({
       success: true,
-      body: req.body,
     });
   } catch (err) {
     res.send({
