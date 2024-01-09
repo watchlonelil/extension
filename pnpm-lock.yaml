@@ -8,6 +8,9 @@ dependencies:
   '@plasmohq/messaging':
     specifier: ^0.6.1
     version: 0.6.1(react@18.2.0)
+  '@plasmohq/storage':
+    specifier: ^1.9.0
+    version: 1.9.0(react@18.2.0)
   plasmo:
     specifier: 0.84.0
     version: 0.84.0(react-dom@18.2.0)(react@18.2.0)
@@ -2306,6 +2309,18 @@ packages:
       - velocityjs
       - walrus
       - whiskers
+    dev: false
+
+  /@plasmohq/storage@1.9.0(react@18.2.0):
+    resolution: {integrity: sha512-mntoJ0EVh7JfYyMKWKnt6yqVlJnwavEkwdXssSOxS1CEeyNX2GPkXQfChvlGhuEJplqcRhLaym6rEc690Ao0fg==}
+    peerDependencies:
+      react: ^16.8.6 || ^17 || ^18
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      pify: 6.1.0
+      react: 18.2.0
     dev: false
 
   /@pnpm/config.env-replace@1.1.0:
@@ -5747,6 +5762,11 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /pify@6.1.0:
+    resolution: {integrity: sha512-KocF8ve28eFjjuBKKGvzOBGzG8ew2OqOOSxTTZhirkzH7h3BI1vyzqlR0qbfcDBve1Yzo3FVlWUAtCRrbVN8Fw==}
+    engines: {node: '>=14.16'}
+    dev: false
 
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}

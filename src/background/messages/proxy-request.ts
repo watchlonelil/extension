@@ -1,7 +1,10 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
+import { domainIsInWhitelist, validateDomainWhiteList } from '~utils/storage';
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   try {
+    await validateDomainWhiteList(req.body.requestDomain);
+
     const response = await fetch(req.body.url, {
       headers: req.body.headers,
     });
