@@ -7,7 +7,6 @@ movie-web extension, allows providers to work without proxy
 1. Messaging
   - `makeRequest` message. Make requests that ignore CORS and can set forbidden headers. Replies with request results.
   - `prepareStream` message. For a list of domains, set required or preferred headers.
-  - `clearStream` message. Clear any streaming header rules that were set.
   - `hello` message. Gives details on the extension, like the version. If not allowed, simply respond with an error describing it.
 
 2. Popout
@@ -21,7 +20,7 @@ movie-web extension, allows providers to work without proxy
 2. If no extension (or not suitable) fallback on standard providers.
 3. Else, make new provider controls, target set to BROWSER_EXTENSION, with custom fetcher that uses the extension to send requests instead.
 4. If any message to the extension fail. Fallback to standard providers again.
-5. When a stream will be played, first communicate to extension through a `clearStream` followed by `prepareStream`
+5. When a stream will be played, communicate to extension through a `prepareStream`
 
 # Plasmo
 
