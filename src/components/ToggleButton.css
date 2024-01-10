@@ -44,6 +44,7 @@
   overflow: hidden;
   border: 0;
   background-color: transparent;
+  transition: transform 50ms;
 }
 
 .inside-glow {
@@ -53,6 +54,10 @@
 
 .toggle-button:hover .inside-glow {
   transform: rotate(45deg);
+}
+
+.toggle-button:active {
+  transform: scale(0.95);
 }
 
 .actual-button-style {
