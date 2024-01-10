@@ -1,4 +1,5 @@
 import { BottomLabel } from '~components/BottomLabel';
+import { DisabledScreen } from '~components/DisabledScreen';
 import { Frame } from '~components/Frame';
 import { ToggleButton } from '~components/ToggleButton';
 import { useDomain } from '~hooks/useDomain';
@@ -12,8 +13,7 @@ function IndexPopup() {
   return (
     <Frame>
       <div className="popup">
-        <ToggleButton active={isWhitelisted} onClick={toggle} />
-        {!domain ? <p>The movie-web extension can not be used on this page</p> : null}
+        {!domain ? <DisabledScreen /> : <ToggleButton active={isWhitelisted} onClick={toggle} />}
         <BottomLabel />
       </div>
     </Frame>

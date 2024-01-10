@@ -1,6 +1,6 @@
 .bottom-label {
   position: absolute;
-  bottom: .5rem;
+  bottom: .25rem;
   display: flex;
   align-items: center;
   gap: .5rem;
@@ -12,4 +12,5 @@
   width: 2px;
   height: 2px;
   background: currentColor;
+  border-radius: 100px;
 }

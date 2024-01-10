@@ -8,7 +8,7 @@ export interface ToggleButtonProps {
 
 export function ToggleButton(props: ToggleButtonProps) {
   const opacityStyle = {
-    opacity: props.active ? 0 : 1,
+    opacity: props.active ? 1 : 0,
   };
 
   return (
@@ -27,7 +27,7 @@ export function ToggleButton(props: ToggleButtonProps) {
           <div className="actual-button-style active" style={opacityStyle} />
           <Icon name="power" />
           <div
-            className="glow-thingie"
+            className="inside-glow"
             style={{
               backgroundColor: props.active ? '#452D7C' : '#181724',
             }}

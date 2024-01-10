@@ -1,0 +1,22 @@
+.disabled {
+  color: white;
+  text-align: center;
+  max-width: 230px;
+  font-size: 16px;
+}
+
+.disabled svg {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 auto;
+  color: #B44868;
+}
+
+.disabled p {
+  color: #4A4864;
+}
+
+.disabled strong {
+  color: white;
+}

@@ -54,18 +54,17 @@
   border-radius: 1000px;
   box-sizing: border-box;
   border-color: rgba(96, 66, 166, 0.50);
-  background-image: linear-gradient(180deg, #463177 0%, #2D1C54 100%);
-  border: 1px solid #322E48;
   transition: opacity 300ms ease;
-}
-
-.actual-button-style.active {
-  z-index: 1;
-  border-color: #322E48;
+  border: 1px solid #322E48;
   background-image: linear-gradient(180deg, #232236 0%, #0E0D15 100%);
 }
 
-.toggle-button .glow-thingie, .toggle-button svg {
+.actual-button-style.active {
+  border-color: #48307F;
+  background-image: linear-gradient(180deg, #463177 0%, #2D1C54 100%);
+}
+
+.toggle-button .inside-glow, .toggle-button svg {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -73,7 +72,7 @@
   transition: color 300ms;
 }
 
-.toggle-button .glow-thingie {
+.toggle-button .inside-glow {
   position: absolute;
   width: 90%;
   height: 90%;
