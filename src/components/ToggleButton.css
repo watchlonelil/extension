@@ -46,8 +46,13 @@
   background-color: transparent;
 }
 
-.toggle-button:active .inside-glow {
-  transform: rotate(180deg);
+.inside-glow {
+  transition: transform 300ms;
+  transform: rotate(0deg);
+}
+
+.toggle-button:hover .inside-glow {
+  transform: rotate(45deg);
 }
 
 .actual-button-style {
@@ -74,7 +79,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: color 300ms;
+  transition: color 300ms, transform 300ms;
 }
 
 .toggle-button .inside-glow {
