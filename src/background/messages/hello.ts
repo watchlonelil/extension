@@ -1,5 +1,6 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 
+import { getVersion } from '~hooks/useVersion';
 import type { BaseRequest } from '~types/request';
 import type { BaseResponse } from '~types/response';
 import { assertDomainWhitelist } from '~utils/storage';
@@ -11,8 +12,7 @@ type Response = BaseResponse<{
 const handler: PlasmoMessaging.MessageHandler<BaseRequest, Response> = async (req, res) => {
   try {
     await assertDomainWhitelist(req.body.requestDomain);
-
-    const version = chrome.runtime.getManifest().version;
+    const version = getVersion();
 
     res.send({
       success: true,
