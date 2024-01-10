@@ -13,10 +13,11 @@ interface Request extends BaseRequest {
 
 const mapHeadersToDeclarativeNetRequestHeaders = (
   headers: Record<string, string>,
-): chrome.declarativeNetRequest.ModifyHeaderInfo[] => {
+  op: string,
+): { header: string; operation: any; value: string }[] => {
   return Object.entries(headers).map(([name, value]) => ({
     header: name,
-    operation: chrome.declarativeNetRequest.HeaderOperation.SET,
+    operation: op,
     value,
   }));
 };
@@ -25,43 +26,91 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
   try {
     await assertDomainWhitelist(req.body.requestDomain);
 
-    await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: [req.body.ruleId],
-      addRules: [
-        {
-          id: req.body.ruleId,
-          condition: {
-            requestDomains: req.body.targetDomains,
+    if (chrome) {
+      await chrome.declarativeNetRequest.updateDynamicRules({
+        removeRuleIds: [req.body.ruleId],
+        addRules: [
+          {
+            id: req.body.ruleId,
+            condition: {
+              requestDomains: req.body.targetDomains,
+            },
+            action: {
+              type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
+              ...(req.body.requestHeaders
+                ? {
+                    requestHeaders: mapHeadersToDeclarativeNetRequestHeaders(
+                      req.body.requestHeaders,
+                      chrome.declarativeNetRequest.HeaderOperation.SET,
+                    ),
+                  }
+                : {}),
+              responseHeaders: [
+                {
+                  header: 'Access-Control-Allow-Origin',
+                  operation: chrome.declarativeNetRequest.HeaderOperation.SET,
+                  value: '*',
+                },
+                {
+                  header: 'Access-Control-Allow-Methods',
+                  operation: chrome.declarativeNetRequest.HeaderOperation.SET,
+                  value: 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                },
+                {
+                  header: 'Access-Control-Allow-Headers',
+                  operation: chrome.declarativeNetRequest.HeaderOperation.SET,
+                  value: '*',
+                },
+                ...mapHeadersToDeclarativeNetRequestHeaders(
+                  req.body.responseHeaders ?? {},
+                  chrome.declarativeNetRequest.HeaderOperation.SET,
+                ),
+              ],
+            },
           },
-          action: {
-            type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
-            ...(req.body.requestHeaders && {
-              requestHeaders: mapHeadersToDeclarativeNetRequestHeaders(req.body.requestHeaders),
-            }),
-            responseHeaders: [
-              {
-                header: 'Access-Control-Allow-Origin',
-                operation: chrome.declarativeNetRequest.HeaderOperation.SET,
-                value: '*',
-              },
-              {
-                header: 'Access-Control-Allow-Methods',
-                operation: chrome.declarativeNetRequest.HeaderOperation.SET,
-                value: 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-              },
-              {
-                header: 'Access-Control-Allow-Headers',
-                operation: chrome.declarativeNetRequest.HeaderOperation.SET,
-                value: '*',
-              },
-              ...mapHeadersToDeclarativeNetRequestHeaders(req.body.responseHeaders ?? {}),
-            ],
+        ],
+      });
+      if (chrome.runtime.lastError?.message) throw new Error(chrome.runtime.lastError.message);
+    } else {
+      browser.declarativeNetRequest.updateDynamicRules({
+        removeRuleIds: [req.body.ruleId],
+        addRules: [
+          {
+            id: req.body.ruleId,
+            condition: {
+              requestDomains: req.body.targetDomains,
+            },
+            action: {
+              type: 'modifyHeaders',
+              ...(req.body.requestHeaders
+                ? {
+                    requestHeaders: mapHeadersToDeclarativeNetRequestHeaders(req.body.requestHeaders, 'set'),
+                  }
+                : {}),
+              responseHeaders: [
+                {
+                  header: 'Access-Control-Allow-Origin',
+                  operation: 'set',
+                  value: '*',
+                },
+                {
+                  header: 'Access-Control-Allow-Methods',
+                  operation: 'set',
+                  value: 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                },
+                {
+                  header: 'Access-Control-Allow-Headers',
+                  operation: 'set',
+                  value: '*',
+                },
+                ...mapHeadersToDeclarativeNetRequestHeaders(req.body.responseHeaders ?? {}, 'set'),
+              ],
+            },
           },
-        },
-      ],
-    });
-
-    if (chrome.runtime.lastError?.message) throw new Error(chrome.runtime.lastError.message);
+        ],
+      });
+      if (browser.runtime.lastError?.message) throw new Error(browser.runtime.lastError.message);
+    }
 
     res.send({
       success: true,
