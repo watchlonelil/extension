@@ -46,6 +46,10 @@
   background-color: transparent;
 }
 
+.toggle-button:active .inside-glow {
+  transform: rotate(180deg);
+}
+
 .actual-button-style {
   position: absolute;
   top: 0;
