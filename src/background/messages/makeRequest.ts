@@ -15,14 +15,16 @@ export interface Request extends BaseRequest {
   body?: string | FormData | URLSearchParams;
 }
 
-type Response = BaseResponse<{
-  status: number;
-  requestHeaders: Record<string, string>;
-  responseHeaders: Record<string, string>;
-  body: string | Record<string, unknown>;
+type Response<T> = BaseResponse<{
+  response: {
+    statusCode: number;
+    headers: Record<string, string>;
+    finalUrl: string;
+    body: T;
+  };
 }>;
 
-const handler: PlasmoMessaging.MessageHandler<Request, Response> = async (req, res) => {
+const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (req, res) => {
   try {
     await validateDomainWhiteList(req.body.requestDomain);
 
@@ -36,10 +38,12 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response> = async (req, r
 
     res.send({
       success: true,
-      status: response.status,
-      requestHeaders: req.body.headers,
-      responseHeaders: Object.fromEntries(response.headers.entries()),
-      body,
+      response: {
+        statusCode: response.status,
+        headers: Object.fromEntries(response.headers.entries()), // Headers object isn't serializable
+        body,
+        finalUrl: response.url,
+      },
     });
   } catch (err) {
     res.send({
