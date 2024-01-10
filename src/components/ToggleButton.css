@@ -33,6 +33,7 @@
 }
 
 .toggle-button {
+  cursor: pointer;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -43,6 +44,10 @@
   overflow: hidden;
   border: 0;
   background-color: transparent;
+}
+
+.toggle-button:active .inside-glow {
+  transform: rotate(180deg);
 }
 
 .actual-button-style {
