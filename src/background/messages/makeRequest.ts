@@ -3,7 +3,7 @@ import type { PlasmoMessaging } from '@plasmohq/messaging';
 import type { BaseRequest } from '~types/request';
 import type { BaseResponse } from '~types/response';
 import { makeFullUrl } from '~utils/fetcher';
-import { validateDomainWhiteList } from '~utils/storage';
+import { assertDomainWhitelist } from '~utils/storage';
 
 export interface Request extends BaseRequest {
   baseUrl?: string;
@@ -26,7 +26,7 @@ type Response<T> = BaseResponse<{
 
 const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (req, res) => {
   try {
-    await validateDomainWhiteList(req.body.requestDomain);
+    await assertDomainWhitelist(req.body.requestDomain);
 
     const response = await fetch(makeFullUrl(req.body.url, req.body), {
       method: req.body.method,

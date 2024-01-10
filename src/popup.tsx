@@ -1,61 +1,20 @@
-import { useStorage } from '@plasmohq/storage/hook';
-import { useState } from 'react';
-
-import { DEFAULT_DOMAIN_WHITELIST } from '~utils/storage';
+import { Frame } from '~components/Frame';
+import { ToggleButton } from '~components/ToggleButton';
+import { useDomain } from '~hooks/useDomain';
+import { useToggleWhitelistDomain } from '~hooks/useDomainWhitelist';
+import { useVersion } from '~hooks/useVersion';
 
 function IndexPopup() {
-  const [domainInput, setDomainInput] = useState('');
-  const [domainWhiteist, setDomainWhitelist] = useStorage<string[]>(
-    'domainWhitelist',
-    (v) => v ?? DEFAULT_DOMAIN_WHITELIST,
-  );
-
-  const [error, setError] = useState<string | null>(null);
-
-  const handleDomainSubmit = () => {
-    try {
-      const origin = new URL(domainInput).origin;
-      setDomainWhitelist([...domainWhiteist, origin]);
-      setDomainInput('');
-    } catch (e) {
-      setError('Invalid domain');
-    }
-  };
+  const domain = useDomain();
+  const { isWhitelisted, toggle } = useToggleWhitelistDomain(domain);
+  const version = useVersion({ prefixed: true });
 
   return (
-    <div style={{ width: 300 }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <h1 style={{ flexGrow: 1 }}>movie-web</h1>
-
-        <h3>v{chrome.runtime.getManifest().version}</h3>
-      </div>
-
-      <h2 style={{ marginTop: 0 }}>Domains</h2>
-
-      <div>
-        <div>
-          <input type="text" value={domainInput} onChange={(e) => setDomainInput(e.target.value)} />
-          <button type="button" onClick={handleDomainSubmit}>
-            Save
-          </button>
-        </div>
-        {error && <span style={{ fontWeight: 'bold' }}>{error}</span>}
-        <table>
-          <tbody>
-            {domainWhiteist.map((domain) => (
-              <tr key={domain}>
-                <td>{domain}</td>
-                <td>
-                  <button type="button" onClick={() => setDomainWhitelist(domainWhiteist.filter((d) => d !== domain))}>
-                    Remove
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Frame>
+      <ToggleButton active={isWhitelisted} onClick={toggle} />
+      {!domain ? <p>Cant use extension on this page</p> : null}
+      <h3>{version} - movie-web</h3>
+    </Frame>
   );
 }
 
