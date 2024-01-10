@@ -35,7 +35,7 @@ export function ToggleButton(props: ToggleButtonProps) {
         </button>
       </div>
       <p>
-        Extension{props.active ? '' : ' not'} enabled on <strong>movie-web.app</strong>
+        Extension {props.active ? 'enabled' : 'disabled'} <br /> on <strong>movie-web.app</strong>
       </p>
     </div>
   );

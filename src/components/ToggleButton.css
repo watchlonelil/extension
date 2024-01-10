@@ -96,8 +96,8 @@
 .button-container p {
   color: #4A4863;
   text-align: center;
-  max-width: 180px;
   font-size: 16px;
+  margin-top: 1rem;
 }
 
 .button-container strong {
