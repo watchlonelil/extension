@@ -1,0 +1,15 @@
+.bottom-label {
+  position: absolute;
+  bottom: .5rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: normal;
+  color: #4A4863;
+}
+
+.dot {
+  width: 2px;
+  height: 2px;
+  background: currentColor;
+}

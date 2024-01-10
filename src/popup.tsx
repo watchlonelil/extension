@@ -1,19 +1,21 @@
+import { BottomLabel } from '~components/BottomLabel';
 import { Frame } from '~components/Frame';
 import { ToggleButton } from '~components/ToggleButton';
 import { useDomain } from '~hooks/useDomain';
 import { useToggleWhitelistDomain } from '~hooks/useDomainWhitelist';
-import { useVersion } from '~hooks/useVersion';
+import './Popup.css';
 
 function IndexPopup() {
   const domain = useDomain();
   const { isWhitelisted, toggle } = useToggleWhitelistDomain(domain);
-  const version = useVersion({ prefixed: true });
 
   return (
     <Frame>
-      <ToggleButton active={isWhitelisted} onClick={toggle} />
-      {!domain ? <p>Cant use extension on this page</p> : null}
-      <h3>{version} - movie-web</h3>
+      <div className="popup">
+        <ToggleButton active={isWhitelisted} onClick={toggle} />
+        {!domain ? <p>The movie-web extension can not be used on this page</p> : null}
+        <BottomLabel />
+      </div>
     </Frame>
   );
 }
