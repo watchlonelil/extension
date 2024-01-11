@@ -1,3 +1,1 @@
-export interface BaseRequest {
-  requestDomain: string;
-}
+export interface BaseRequest {}

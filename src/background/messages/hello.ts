@@ -17,7 +17,7 @@ const handler: PlasmoMessaging.MessageHandler<BaseRequest, Response> = async (re
     res.send({
       success: true,
       version,
-      allowed: await isDomainWhitelisted(req.body.requestDomain),
+      allowed: await isDomainWhitelisted(req.sender.tab.url),
     });
   } catch (err) {
     res.send({

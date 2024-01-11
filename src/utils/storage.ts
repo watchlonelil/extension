@@ -16,7 +16,8 @@ export function useDomainStorage() {
   return useStorage<string[]>('domainWhitelist', (v) => v ?? DEFAULT_DOMAIN_WHITELIST);
 }
 
-export const isDomainWhitelisted = async (url: string) => {
+export const isDomainWhitelisted = async (url: string | undefined) => {
+  if (!url) return false;
   const domain = makeUrlIntoDomain(url);
   if (!domain) return false;
   return domainIsInWhitelist(domain);

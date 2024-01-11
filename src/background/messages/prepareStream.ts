@@ -24,7 +24,7 @@ const mapHeadersToDeclarativeNetRequestHeaders = (
 
 const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (req, res) => {
   try {
-    await assertDomainWhitelist(req.body.requestDomain);
+    await assertDomainWhitelist(req.sender.tab.url);
 
     if (chrome) {
       await chrome.declarativeNetRequest.updateDynamicRules({

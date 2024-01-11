@@ -26,7 +26,7 @@ type Response<T> = BaseResponse<{
 
 const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (req, res) => {
   try {
-    await assertDomainWhitelist(req.body.requestDomain);
+    await assertDomainWhitelist(req.sender.tab.url);
 
     const response = await fetch(makeFullUrl(req.body.url, req.body), {
       method: req.body.method,
