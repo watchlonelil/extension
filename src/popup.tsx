@@ -13,7 +13,7 @@ function IndexPopup() {
   return (
     <Frame>
       <div className="popup">
-        {!domain ? <DisabledScreen /> : <ToggleButton active={isWhitelisted} onClick={toggle} />}
+        {!domain ? <DisabledScreen /> : <ToggleButton active={isWhitelisted} onClick={toggle} domain={domain} />}
         <BottomLabel />
       </div>
     </Frame>

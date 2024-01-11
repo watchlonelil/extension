@@ -4,6 +4,7 @@ import './ToggleButton.css';
 export interface ToggleButtonProps {
   onClick?: () => void;
   active?: boolean;
+  domain: string;
 }
 
 export function ToggleButton(props: ToggleButtonProps) {
@@ -35,7 +36,7 @@ export function ToggleButton(props: ToggleButtonProps) {
         </button>
       </div>
       <p>
-        Extension {props.active ? 'enabled' : 'disabled'} <br /> on <strong>movie-web.app</strong>
+        Extension {props.active ? 'enabled' : 'disabled'} <br /> on <strong>{props.domain}</strong>
       </p>
     </div>
   );
