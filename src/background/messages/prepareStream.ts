@@ -2,6 +2,7 @@ import type { PlasmoMessaging } from '@plasmohq/messaging';
 
 import type { BaseRequest } from '~types/request';
 import type { BaseResponse } from '~types/response';
+import { isChrome } from '~utils/extension';
 import { assertDomainWhitelist } from '~utils/storage';
 
 interface Request extends BaseRequest {
@@ -25,19 +26,21 @@ const mapHeadersToDeclarativeNetRequestHeaders = (
 const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (req, res) => {
   try {
     await assertDomainWhitelist(req.sender.tab.url);
-
-    if (chrome) {
+    console.log(req.body);
+    let rules: any;
+    if (isChrome()) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [req.body.ruleId],
         addRules: [
           {
             id: req.body.ruleId,
             condition: {
-              requestDomains: req.body.targetDomains,
+              // TODO: Fix this idk why it doesn't work from fetcher requests
+              // requestDomains: req.body.targetDomains,
             },
             action: {
               type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
-              ...(req.body.requestHeaders
+              ...(req.body.requestHeaders && Object.keys(req.body.requestHeaders).length > 0
                 ? {
                     requestHeaders: mapHeadersToDeclarativeNetRequestHeaders(
                       req.body.requestHeaders,
@@ -70,19 +73,20 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           },
         ],
       });
+      rules = await chrome.declarativeNetRequest.getDynamicRules();
       if (chrome.runtime.lastError?.message) throw new Error(chrome.runtime.lastError.message);
     } else {
-      browser.declarativeNetRequest.updateDynamicRules({
+      await browser.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [req.body.ruleId],
         addRules: [
           {
             id: req.body.ruleId,
             condition: {
-              requestDomains: req.body.targetDomains,
+              // requestDomains: req.body.targetDomains,
             },
             action: {
               type: 'modifyHeaders',
-              ...(req.body.requestHeaders
+              ...(req.body.requestHeaders && Object.keys(req.body.requestHeaders).length > 0
                 ? {
                     requestHeaders: mapHeadersToDeclarativeNetRequestHeaders(req.body.requestHeaders, 'set'),
                   }
@@ -109,11 +113,15 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           },
         ],
       });
+      rules = await browser.declarativeNetRequest.getDynamicRules();
       if (browser.runtime.lastError?.message) throw new Error(browser.runtime.lastError.message);
     }
 
     res.send({
       success: true,
+      // @ts-expect-error TODO: remove this when debugging is done :D
+      body: req.body,
+      rules,
     });
   } catch (err) {
     res.send({
