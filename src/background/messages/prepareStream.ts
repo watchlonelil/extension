@@ -26,8 +26,6 @@ const mapHeadersToDeclarativeNetRequestHeaders = (
 const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (req, res) => {
   try {
     await assertDomainWhitelist(req.sender.tab.url);
-    console.log(req.body);
-    let rules: any;
     if (isChrome()) {
       await chrome.declarativeNetRequest.updateDynamicRules({
         removeRuleIds: [req.body.ruleId],
@@ -35,8 +33,7 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           {
             id: req.body.ruleId,
             condition: {
-              // TODO: Fix this idk why it doesn't work from fetcher requests
-              // requestDomains: req.body.targetDomains,
+              requestDomains: req.body.targetDomains,
             },
             action: {
               type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
@@ -73,7 +70,6 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           },
         ],
       });
-      rules = await chrome.declarativeNetRequest.getDynamicRules();
       if (chrome.runtime.lastError?.message) throw new Error(chrome.runtime.lastError.message);
     } else {
       await browser.declarativeNetRequest.updateDynamicRules({
@@ -82,7 +78,7 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           {
             id: req.body.ruleId,
             condition: {
-              // requestDomains: req.body.targetDomains,
+              requestDomains: req.body.targetDomains,
             },
             action: {
               type: 'modifyHeaders',
@@ -113,15 +109,11 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           },
         ],
       });
-      rules = await browser.declarativeNetRequest.getDynamicRules();
       if (browser.runtime.lastError?.message) throw new Error(browser.runtime.lastError.message);
     }
 
     res.send({
       success: true,
-      // @ts-expect-error TODO: remove this when debugging is done :D
-      body: req.body,
-      rules,
     });
   } catch (err) {
     res.send({
