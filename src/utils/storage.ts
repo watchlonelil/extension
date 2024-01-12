@@ -7,8 +7,14 @@ export const DEFAULT_DOMAIN_WHITELIST = ['movie-web.app', 'localhost:5173'];
 
 export const storage = new Storage();
 
-const domainIsInWhitelist = async (domain: string) => {
+const getDomainWhiteList = async () => {
   const whitelist = await storage.get<string[]>('domainWhitelist');
+  if (!whitelist) await storage.set('domainWhitelist', DEFAULT_DOMAIN_WHITELIST);
+  return whitelist ?? DEFAULT_DOMAIN_WHITELIST;
+};
+
+const domainIsInWhitelist = async (domain: string) => {
+  const whitelist = await getDomainWhiteList();
   return whitelist?.some((d) => d.includes(domain)) ?? false;
 };
 
