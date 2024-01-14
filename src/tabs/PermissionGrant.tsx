@@ -1,19 +1,28 @@
+import { useDomainWhitelist } from '~hooks/useDomainWhitelist';
 import { usePermission } from '~hooks/usePermission';
+import { makeUrlIntoDomain } from '~utils/domains';
 
 import './PermissionGrant.css';
 
 export default function PermissionGrant() {
+  const { domainWhitelist } = useDomainWhitelist();
   const { hasPermission, grantPermission } = usePermission();
 
   const queryParams = new URLSearchParams(window.location.search);
   const redirectUrl = queryParams.get('redirectUrl') ?? 'https://movie-web.app';
-  const domain = new URL(redirectUrl).hostname;
+  const domain = makeUrlIntoDomain(redirectUrl);
+
+  const permissionsGranted = domainWhitelist.includes(domain) && hasPermission;
+
+  const redirectBack = () => {
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.update(tab.id, { url: queryParams.get('redirectUrl') ?? 'https://movie-web.app' });
+    });
+  };
 
   const handleGrantPermission = () => {
-    grantPermission().then(() => {
-      chrome.tabs.getCurrent((tab) => {
-        chrome.tabs.update(tab.id, { url: queryParams.get('redirectUrl') ?? 'https://movie-web.app' });
-      });
+    grantPermission(domain).then(() => {
+      redirectBack();
     });
   };
 
@@ -30,7 +39,7 @@ export default function PermissionGrant() {
           </p>
         </div>
         <div className="footer">
-          <button type="button" className="go-back-btn">
+          <button type="button" className="go-back-btn" onClick={redirectBack}>
             Go back
           </button>
           <div style={{ flex: 1 }} />
@@ -38,7 +47,7 @@ export default function PermissionGrant() {
             type="button"
             className="grant-permission-btn"
             onClick={handleGrantPermission}
-            disabled={hasPermission}
+            disabled={permissionsGranted}
           >
             Grant Permission
           </button>
