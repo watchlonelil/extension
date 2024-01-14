@@ -16,3 +16,7 @@ relayMessage({
 relayMessage({
   name: 'prepareStream',
 });
+
+relayMessage({
+  name: 'openPage',
+});
