@@ -16,7 +16,7 @@ export default function PermissionGrant() {
 
   const redirectBack = () => {
     chrome.tabs.getCurrent((tab) => {
-      chrome.tabs.update(tab.id, { url: queryParams.get('redirectUrl') ?? 'https://movie-web.app' });
+      chrome.tabs.update(tab.id, { url: redirectUrl });
     });
   };
 
