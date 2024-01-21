@@ -47,7 +47,9 @@
       "tabs"
     ],
     "host_permissions": [
-      "<all_urls>"
+      "<all_urls>",
+      "https://dev.movie-web.app/*",
+      "https://movie-web.app/*"
     ],
     "browser_specific_settings": {
       "gecko": {
