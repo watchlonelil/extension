@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import { usePermission } from '~hooks/usePermission';
 import { useDomainStorage } from '~utils/storage';
 
 export function useDomainWhitelist() {
@@ -25,11 +26,16 @@ export function useDomainWhitelist() {
 export function useToggleWhitelistDomain(domain: string) {
   const { domainWhitelist, addDomain, removeDomain } = useDomainWhitelist();
   const isWhitelisted = domainWhitelist.includes(domain);
+  const { grantPermission } = usePermission();
 
   const toggle = useCallback(() => {
-    if (isWhitelisted) removeDomain(domain);
-    else addDomain(domain);
-  }, [isWhitelisted, domain, addDomain, removeDomain]);
+    if (!isWhitelisted) {
+      addDomain(domain);
+      return;
+    }
+
+    removeDomain(domain);
+  }, [isWhitelisted, domain, addDomain, removeDomain, grantPermission]);
 
   return {
     toggle,

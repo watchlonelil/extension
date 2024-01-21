@@ -12,7 +12,7 @@ export function usePermission() {
   const { addDomain } = useDomainWhitelist();
   const [permission, setPermission] = useState(false);
 
-  const grantPermission = useCallback(async (domain: string) => {
+  const grantPermission = useCallback(async (domain?: string) => {
     const granted = await chrome.permissions.request({
       origins: ['<all_urls>'],
     });
