@@ -1,8 +1,8 @@
 {
   "name": "@movie-web/extension",
   "displayName": "movie-web extension",
-  "version": "1.0.0",
-  "description": "movie-web extension, allows providers to work without proxy",
+  "version": "1.0.1",
+  "description": "Enhance your movie-web experience with just one click",
   "author": "movie-web",
   "scripts": {
     "dev": "plasmo dev",
