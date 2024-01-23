@@ -7,7 +7,8 @@ import { assertDomainWhitelist } from '~utils/storage';
 
 interface Request extends BaseRequest {
   ruleId: number;
-  targetDomains: [string, ...string[]];
+  targetDomains?: [string, ...string[]];
+  targetRegex?: string;
   requestHeaders?: Record<string, string>;
   responseHeaders?: Record<string, string>;
 }
@@ -33,7 +34,8 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           {
             id: req.body.ruleId,
             condition: {
-              requestDomains: req.body.targetDomains,
+              ...(req.body.targetDomains && { requestDomains: req.body.targetDomains }),
+              ...(req.body.targetRegex && { regexFilter: req.body.targetRegex }),
             },
             action: {
               type: chrome.declarativeNetRequest.RuleActionType.MODIFY_HEADERS,
@@ -78,7 +80,8 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
           {
             id: req.body.ruleId,
             condition: {
-              requestDomains: req.body.targetDomains,
+              ...(req.body.targetDomains && { requestDomains: req.body.targetDomains }),
+              ...(req.body.targetRegex && { regexFilter: req.body.targetRegex }),
             },
             action: {
               type: 'modifyHeaders',
