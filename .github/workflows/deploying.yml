@@ -94,7 +94,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./chrome/chrome-mv3-prod.zip
-        asset_name: chrome.crx
+        asset_name: extension-mw.chrome.crx
         asset_content_type: application/x-chrome-extension
 
     - name: Upload Firefox release
@@ -104,5 +104,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./firefox/firefox-mv3-prod.zip
-        asset_name: movie-web-extension.firefox.xpi
+        asset_name: extension-mw.firefox.xpi
         asset_content_type: application/x-xpinstall.xpi
