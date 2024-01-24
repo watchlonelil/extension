@@ -64,13 +64,13 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: chrome
-        path: ./chrome.zip
+        path: ./chrome
 
     - name: Download Firefox artifact
       uses: actions/download-artifact@v4
       with:
         name: firefox
-        path: ./firefox.zip
+        path: ./firefox
 
     - name: Get version
       id: package-version
@@ -93,9 +93,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./chrome.zip
-        asset_name: chrome.zip
-        asset_content_type: application/zip
+        asset_path: ./chrome/chrome-mv3-prod.zip
+        asset_name: chrome.crx
+        asset_content_type: application/x-chrome-extension
 
     - name: Upload Firefox release
       uses: actions/upload-release-asset@v1
@@ -103,6 +103,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./firefox.zip
-        asset_name: firefox.zip
-        asset_content_type: application/zip
+        asset_path: ./firefox/firefox-mv3-prod.zip
+        asset_name: movie-web-extension.firefox.xpi
+        asset_content_type: application/x-xpinstall.xpi

@@ -29,8 +29,5 @@ jobs:
       - name: Install packages
         run: pnpm install
 
-      # - name: Run tests
-      #   run: pnpm run test
-
       - name: Run linting
         run: pnpm run lint
