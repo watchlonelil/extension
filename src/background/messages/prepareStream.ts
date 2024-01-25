@@ -21,7 +21,6 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
       success: true,
     });
   } catch (err) {
-    console.log(err);
     res.send({
       success: false,
       error: err.message,

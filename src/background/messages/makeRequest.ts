@@ -12,7 +12,7 @@ type Body =
       value: string;
     }
   | {
-      bodyType: 'FormData' | 'URLSearchParams' | 'Object';
+      bodyType: 'FormData' | 'URLSearchParams' | 'object';
       value: Record<string, string>;
     };
 
@@ -50,7 +50,7 @@ const mapBodyToFetchBody = (body: Request['body']): BodyInit => {
     });
     return searchParams;
   }
-  if (body?.bodyType === 'Object') {
+  if (body?.bodyType === 'object') {
     return JSON.stringify(body.value);
   }
   if (body?.bodyType === 'string') {
@@ -63,18 +63,14 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
   try {
     await assertDomainWhitelist(req.sender.tab.url);
 
-    console.log(req.body.headers['User-Agent']);
     if (req.body.headers['User-Agent']) {
-      console.log('preparing stream');
       await setDynamicRules({
         ruleId: 23498,
-        targetDomains: [req.body.url],
+        targetDomains: [new URL(req.body.url).hostname],
         requestHeaders: {
           'User-Agent': req.body.headers['User-Agent'],
         },
       });
-      const rules = await chrome.declarativeNetRequest.getDynamicRules();
-      console.log(rules);
     }
 
     const response = await fetch(makeFullUrl(req.body.url, req.body), {
@@ -95,8 +91,6 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
       },
     });
   } catch (err) {
-    console.log('error');
-    console.log(err);
     res.send({
       success: false,
       error: err.message,
