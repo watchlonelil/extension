@@ -108,3 +108,10 @@ export const setDynamicRules = async (body: DynamicRule) => {
     if (browser.runtime.lastError?.message) throw new Error(browser.runtime.lastError.message);
   }
 };
+
+export const removeDynamicRules = async (ruleIds: number[]) => {
+  await (chrome || browser).declarativeNetRequest.updateDynamicRules({
+    removeRuleIds: ruleIds,
+  });
+  if ((chrome || browser).runtime.lastError?.message) throw new Error((chrome || browser).runtime.lastError.message);
+};
