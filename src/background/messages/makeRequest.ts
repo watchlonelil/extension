@@ -16,7 +16,7 @@ export interface Request extends BaseRequest {
   readHeaders?: Record<string, string>;
   url: string;
   body?: any;
-  bodyType: 'string' | 'FormData' | 'URLSearchParams' | 'object';
+  bodyType?: 'string' | 'FormData' | 'URLSearchParams' | 'object';
 }
 
 type Response<T> = BaseResponse<{
@@ -49,7 +49,7 @@ const mapBodyToFetchBody = (body: Request['body'], bodyType: Request['bodyType']
   if (bodyType === 'string') {
     return body;
   }
-  return undefined;
+  return body;
 };
 
 const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (req, res) => {
