@@ -7,9 +7,5 @@ export interface FrameProps {
 }
 
 export function Frame(props: FrameProps) {
-  return (
-    <div className="frame" style={{ width: 300, height: 300 }}>
-      {props.children}
-    </div>
-  );
+  return <div className="frame">{props.children}</div>;
 }
