@@ -2,8 +2,11 @@ import type { PlasmoMessaging } from '@plasmohq/messaging';
 
 import type { BaseRequest } from '~types/request';
 import type { BaseResponse } from '~types/response';
+import { removeDynamicRules, setDynamicRules } from '~utils/declarativeNetRequest';
 import { makeFullUrl } from '~utils/fetcher';
 import { assertDomainWhitelist } from '~utils/storage';
+
+const MAKE_REQUEST_DYNAMIC_RULE = 23498;
 
 export interface Request extends BaseRequest {
   baseUrl?: string;
@@ -12,7 +15,8 @@ export interface Request extends BaseRequest {
   query?: Record<string, string>;
   readHeaders?: Record<string, string>;
   url: string;
-  body?: string | FormData | URLSearchParams;
+  body?: any;
+  bodyType?: 'string' | 'FormData' | 'URLSearchParams' | 'object';
 }
 
 type Response<T> = BaseResponse<{
@@ -24,15 +28,45 @@ type Response<T> = BaseResponse<{
   };
 }>;
 
+const mapBodyToFetchBody = (body: Request['body'], bodyType: Request['bodyType']): BodyInit => {
+  if (bodyType === 'FormData') {
+    const formData = new FormData();
+    body.forEach(([key, value]) => {
+      formData.append(key, value.toString());
+    });
+  }
+  if (bodyType === 'URLSearchParams') {
+    return new URLSearchParams(body);
+  }
+  if (bodyType === 'object') {
+    return JSON.stringify(body);
+  }
+  if (bodyType === 'string') {
+    return body;
+  }
+  return body;
+};
+
 const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (req, res) => {
   try {
     await assertDomainWhitelist(req.sender.tab.url);
 
+    if (req.body.headers['User-Agent']) {
+      await setDynamicRules({
+        ruleId: MAKE_REQUEST_DYNAMIC_RULE,
+        targetDomains: [new URL(req.body.url).hostname],
+        requestHeaders: {
+          'User-Agent': req.body.headers['User-Agent'],
+        },
+      });
+    }
+
     const response = await fetch(makeFullUrl(req.body.url, req.body), {
       method: req.body.method,
       headers: req.body.headers,
-      body: req.body.body,
+      body: mapBodyToFetchBody(req.body.body, req.body.bodyType),
     });
+    await removeDynamicRules([MAKE_REQUEST_DYNAMIC_RULE]);
     const contentType = response.headers.get('content-type');
     const body = contentType?.includes('application/json') ? await response.json() : await response.text();
 
