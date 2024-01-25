@@ -31,17 +31,12 @@ type Response<T> = BaseResponse<{
 const mapBodyToFetchBody = (body: Request['body'], bodyType: Request['bodyType']): BodyInit => {
   if (bodyType === 'FormData') {
     const formData = new FormData();
-    Object.entries(body).forEach(([key, value]) => {
+    body.forEach(([key, value]) => {
       formData.append(key, value.toString());
     });
-    return formData;
   }
   if (bodyType === 'URLSearchParams') {
-    const searchParams = new URLSearchParams();
-    Object.entries(body).forEach(([key, value]) => {
-      searchParams.set(key, value.toString());
-    });
-    return searchParams;
+    return new URLSearchParams(body);
   }
   if (bodyType === 'object') {
     return JSON.stringify(body);
