@@ -49,19 +49,20 @@ const mapBodyToFetchBody = (body: Request['body'], bodyType: Request['bodyType']
 
 const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (req, res) => {
   try {
+    const url = makeFullUrl(req.body.url, req.body);
     await assertDomainWhitelist(req.sender.tab.url);
 
     if (req.body.headers['User-Agent']) {
       await setDynamicRules({
         ruleId: MAKE_REQUEST_DYNAMIC_RULE,
-        targetDomains: [new URL(req.body.url).hostname],
+        targetDomains: [new URL(url).hostname],
         requestHeaders: {
           'User-Agent': req.body.headers['User-Agent'],
         },
       });
     }
 
-    const response = await fetch(makeFullUrl(req.body.url, req.body), {
+    const response = await fetch(url, {
       method: req.body.method,
       headers: req.body.headers,
       body: mapBodyToFetchBody(req.body.body, req.body.bodyType),
@@ -80,6 +81,7 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
       },
     });
   } catch (err) {
+    console.error('failed request', err);
     res.send({
       success: false,
       error: err.message,
