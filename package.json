@@ -18,11 +18,12 @@
   "dependencies": {
     "@plasmohq/messaging": "^0.6.1",
     "@plasmohq/storage": "^1.9.0",
-    "plasmo": "0.84.0",
+    "plasmo": "0.84.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@parcel/packager-ts": "2.9.3",
     "@types/chrome": "0.0.251",
     "@types/firefox-webext-browser": "^120.0.0",
     "@types/node": "20.9.0",
@@ -43,13 +44,13 @@
   },
   "manifest": {
     "permissions": [
-      "declarativeNetRequest",
-      "tabs"
+      "declarativeNetRequestWithHostAccess",
+      "activeTab",
+      "scripting"
     ],
-    "host_permissions": [
-      "<all_urls>",
-      "https://dev.movie-web.app/*",
-      "https://movie-web.app/*"
+    "optional_host_permissions": [
+      "https://*/*",
+      "http://*/*"
     ],
     "browser_specific_settings": {
       "gecko": {

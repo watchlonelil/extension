@@ -11,7 +11,7 @@ import { usePermission } from '~hooks/usePermission';
 function IndexPopup() {
   const domain = useDomain();
   const { isWhitelisted, toggle } = useToggleWhitelistDomain(domain);
-  const { grantPermission, hasPermission } = usePermission();
+  const { grantPermission, hasPermission } = usePermission(domain);
 
   let page = 'toggle';
   if (!hasPermission) page = 'perm';

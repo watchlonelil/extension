@@ -1,14 +1,17 @@
 import { isChrome } from './extension';
 
-export function queryCurrentDomain(cb: (domain: string | null) => void) {
-  const handle = (tabUrl: string | null) => {
-    if (!tabUrl) cb(null);
-    else cb(tabUrl);
+export function queryCurrentTab(cb: (tab: chrome.tabs.Tab | browser.tabs.Tab) => void) {
+  const handle = (tab: chrome.tabs.Tab | browser.tabs.Tab) => {
+    cb(tab);
   };
   const ops = { active: true, currentWindow: true } as const;
 
-  if (isChrome()) chrome.tabs.query(ops).then((tabs) => handle(tabs[0]?.url));
-  else browser.tabs.query(ops).then((tabs) => handle(tabs[0]?.url));
+  if (isChrome()) chrome.tabs.query(ops).then((tabs) => handle(tabs[0]));
+  else browser.tabs.query(ops).then((tabs) => handle(tabs[0]));
+}
+
+export function queryCurrentDomain(cb: (domain: string | null) => void) {
+  queryCurrentTab((tab) => cb(tab.url ?? null));
 }
 
 export function listenToTabChanges(cb: () => void) {

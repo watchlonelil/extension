@@ -1,29 +1,39 @@
+import { sendToBackground } from '@plasmohq/messaging';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useDomainWhitelist } from './useDomainWhitelist';
 
-export async function hasPermission() {
+function makeDomainIntoOriginMatchers(domain: string): string[] {
+  return [`http://${domain}/*`, `https://${domain}/*`];
+}
+
+export async function hasPermission(domain: string) {
   return chrome.permissions.contains({
-    origins: ['<all_urls>'],
+    origins: makeDomainIntoOriginMatchers(domain),
   });
 }
 
-export function usePermission() {
+export function usePermission(domain: string) {
   const { addDomain } = useDomainWhitelist();
   const [permission, setPermission] = useState(false);
 
-  const grantPermission = useCallback(async (domain?: string) => {
+  const grantPermission = useCallback(async () => {
     const granted = await chrome.permissions.request({
-      origins: ['<all_urls>'],
+      origins: makeDomainIntoOriginMatchers(domain),
     });
     setPermission(granted);
-    if (granted && domain) addDomain(domain);
+    if (granted && domain) {
+      await sendToBackground({
+        name: 'inject',
+      });
+      addDomain(domain);
+    }
     return granted;
-  }, []);
+  }, [domain]);
 
   useEffect(() => {
-    hasPermission().then((has) => setPermission(has));
-  }, []);
+    hasPermission(domain).then((has) => setPermission(has));
+  }, [domain]);
 
   return {
     hasPermission: permission,

@@ -26,7 +26,7 @@ export function useDomainWhitelist() {
 export function useToggleWhitelistDomain(domain: string) {
   const { domainWhitelist, addDomain, removeDomain } = useDomainWhitelist();
   const isWhitelisted = domainWhitelist.includes(domain);
-  const { grantPermission } = usePermission();
+  const { grantPermission } = usePermission(domain);
 
   const toggle = useCallback(() => {
     if (!isWhitelisted) {

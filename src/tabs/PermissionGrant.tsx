@@ -6,12 +6,12 @@ import './PermissionGrant.css';
 
 export default function PermissionGrant() {
   const { domainWhitelist } = useDomainWhitelist();
-  const { hasPermission, grantPermission } = usePermission();
 
   const queryParams = new URLSearchParams(window.location.search);
   const redirectUrl = queryParams.get('redirectUrl') ?? 'https://movie-web.app';
   const domain = makeUrlIntoDomain(redirectUrl);
 
+  const { hasPermission, grantPermission } = usePermission(domain);
   const permissionsGranted = domainWhitelist.includes(domain) && hasPermission;
 
   const redirectBack = () => {
@@ -21,7 +21,7 @@ export default function PermissionGrant() {
   };
 
   const handleGrantPermission = () => {
-    grantPermission(domain).then(() => {
+    grantPermission().then(() => {
       redirectBack();
     });
   };
