@@ -52,13 +52,11 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
     const url = makeFullUrl(req.body.url, req.body);
     await assertDomainWhitelist(req.sender.tab.url);
 
-    if (req.body.headers['User-Agent']) {
+    if (Object.keys(req.body.headers).length > 0) {
       await setDynamicRules({
         ruleId: MAKE_REQUEST_DYNAMIC_RULE,
         targetDomains: [new URL(url).hostname],
-        requestHeaders: {
-          'User-Agent': req.body.headers['User-Agent'],
-        },
+        requestHeaders: req.body.headers,
       });
     }
 
