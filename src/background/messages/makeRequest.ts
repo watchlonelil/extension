@@ -69,11 +69,18 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
     const contentType = response.headers.get('content-type');
     const body = contentType?.includes('application/json') ? await response.json() : await response.text();
 
+    const cookies = await (chrome || browser).cookies.getAll({
+      url: response.url,
+    });
+
     res.send({
       success: true,
       response: {
         statusCode: response.status,
-        headers: Object.fromEntries(response.headers.entries()), // Headers object isn't serializable
+        headers: {
+          ...Object.fromEntries(response.headers.entries()),
+          'Set-Cookie': cookies.map((cookie) => `${cookie.name}=${cookie.value}`).join('; '),
+        },
         body,
         finalUrl: response.url,
       },
