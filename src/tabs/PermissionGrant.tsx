@@ -2,6 +2,7 @@ import { useDomainWhitelist } from '~hooks/useDomainWhitelist';
 import { usePermission } from '~hooks/usePermission';
 import { makeUrlIntoDomain } from '~utils/domains';
 
+import './font.css';
 import './PermissionGrant.css';
 
 export default function PermissionGrant() {
