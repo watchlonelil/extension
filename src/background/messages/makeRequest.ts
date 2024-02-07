@@ -79,7 +79,7 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
         statusCode: response.status,
         headers: {
           ...Object.fromEntries(response.headers.entries()),
-          'Set-Cookie': cookies.map((cookie) => `${cookie.name}=${cookie.value}`).join('; '),
+          'Set-Cookie': cookies.map((cookie) => `${cookie.name}=${cookie.value}`).join(', '),
         },
         body,
         finalUrl: response.url,
