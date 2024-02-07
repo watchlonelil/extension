@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 
 import { usePermission } from '~hooks/usePermission';
 
-import './font.css';
 import './PermissionRequest.css';
 
 export default function PermissionRequest() {

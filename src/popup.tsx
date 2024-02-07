@@ -8,7 +8,6 @@ import { useToggleWhitelistDomain } from '~hooks/useDomainWhitelist';
 import { usePermission } from '~hooks/usePermission';
 
 import './Popup.css';
-import './tabs/font.css';
 
 function IndexPopup() {
   const domain = useDomain();

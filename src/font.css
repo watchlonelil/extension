@@ -2,16 +2,14 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
-  src: url(data-base64:~assets/inter/regular.ttf) format("ttf");
+  src: url(data-base64:~assets/inter/regular.ttf);
 }
 
 @font-face {
   font-family: "Inter";
   font-style: bold;
   font-weight: 700;
-  font-display: swap;
-  src: url(data-base64:~assets/inter/bold.ttf) format("ttf");
+  src: url(data-base64:~assets/inter/bold.ttf);
 }
 
 body {
@@ -21,4 +19,8 @@ body {
 * {
   margin: 0;
   padding: 0;
+}
+
+button {
+  font-family: inherit;
 }
