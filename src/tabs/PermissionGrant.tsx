@@ -3,6 +3,7 @@ import { usePermission } from '~hooks/usePermission';
 import { makeUrlIntoDomain } from '~utils/domains';
 
 import './PermissionGrant.css';
+import { Button } from '~components/Button';
 
 export default function PermissionGrant() {
   const { domainWhitelist } = useDomainWhitelist();
@@ -29,28 +30,20 @@ export default function PermissionGrant() {
   return (
     <div className="container">
       <div className="inner-container">
-        <h1 className="color-white">Permission</h1>
-        <p className="text-color" style={{ fontSize: 13 }}>
-          Websites need to ask for permission <br /> before they can use this extension
-        </p>
         <div className="permission-card">
+          <h1 className="color-white">Permission</h1>
           <p className="text-color" style={{ textAlign: 'center' }}>
             The website <span className="color-white">{domain}</span> wants to <br /> use the extension on their page.
+            Do you trust them?
           </p>
-        </div>
-        <div className="footer">
-          <button type="button" className="go-back-btn" onClick={redirectBack}>
-            Go back
-          </button>
-          <div style={{ flex: 1 }} />
-          <button
-            type="button"
-            className="grant-permission-btn"
-            onClick={handleGrantPermission}
-            disabled={permissionsGranted}
-          >
-            Grant Permission
-          </button>
+          <div className="buttons">
+            <Button full onClick={handleGrantPermission}>
+              Grant Permission
+            </Button>
+            <Button full onClick={redirectBack} type="secondary">
+              Decline
+            </Button>
+          </div>
         </div>
       </div>
     </div>
