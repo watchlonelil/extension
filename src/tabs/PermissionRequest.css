@@ -1,1 +1,125 @@
 @import url("../font.css");
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #0A0A10;
+  color: white;
+  padding-bottom: 50px;
+}
+
+.container {
+  width: 90%;
+  margin: 100px auto;
+  max-width: 628px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+
+.text-color {
+  color: #7C7C97;
+}
+
+.paragraph {
+  font-size: 1rem;
+  margin-top: 20px;
+  max-width: 500px;
+  line-height: 1.3;
+}
+
+.card-list {
+  margin: 1rem 0;
+}
+
+.card-list>*+* {
+  margin-top: 1rem;
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid #272A37;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  border-radius: 11px;
+}
+
+
+.card .icon-circle {
+  width: 2rem;
+  height: 2rem;
+  background-color: rgba(39, 42, 55, 0.35);
+  border: 1px solid #272A37;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card.purple, .card.purple .icon-circle {
+  border-color: #49277C;
+}
+
+.card.purple .icon-circle {
+  background-color: rgba(51, 27, 87, .4);
+}
+
+.card svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+.card h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 0;
+}
+
+.card .paragraph {
+  margin-top: 0.5rem;
+}
+
+.card .center-y {
+  display: flex;
+  align-items: center;
+}
+
+.card button {
+  padding: 1rem;
+  border-radius: 10px;
+  border: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #222033;
+  color: white;
+}
+
+.card:not(.purple) svg {
+  color: #7C7C97;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, #0A0A10 30%, transparent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
