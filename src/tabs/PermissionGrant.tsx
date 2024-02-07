@@ -1,9 +1,9 @@
+import { Button } from '~components/Button';
 import { useDomainWhitelist } from '~hooks/useDomainWhitelist';
 import { usePermission } from '~hooks/usePermission';
 import { makeUrlIntoDomain } from '~utils/domains';
 
 import './PermissionGrant.css';
-import { Button } from '~components/Button';
 
 export default function PermissionGrant() {
   const { domainWhitelist } = useDomainWhitelist();
