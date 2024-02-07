@@ -1,7 +1,7 @@
 {
   "name": "@movie-web/extension",
   "displayName": "movie-web extension",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Enhance your movie-web experience with just one click",
   "author": "movie-web",
   "scripts": {
