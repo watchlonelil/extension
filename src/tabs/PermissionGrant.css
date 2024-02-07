@@ -15,7 +15,7 @@ body {
   background-color: #0A0A10;
 }
 
-.container {
+.container.permission-grant {
   height: 100%;
   width: 100%;
   display: flex;
@@ -23,14 +23,14 @@ body {
   justify-content: center;
 }
 
-.inner-container {
+.permission-grant .inner-container {
   width: 400px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.permission-card {
+.permission-grant .permission-card {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -42,30 +42,30 @@ body {
   border: 1px solid #272A37;
 }
 
-h1 {
+.permission-grant h1 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
-.permission-card>p {
+.permission-grant .permission-card > p {
   font-size: 1rem;
   margin-top: .5rem;
   margin-bottom: 1rem;
 }
 
-.color-white {
+.permission-grant .color-white {
   color: #ffffff;
 }
 
-.text-color {
+.permission-grant .text-color {
   color: #73739d;
 }
 
-.buttons {
+.permission-grant .buttons {
   width: 100%;
   margin-top: 2rem;
 }
 
-.buttons>*+* {
+.permission-grant .buttons>*+* {
   margin-top: 1rem;
 }

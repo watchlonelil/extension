@@ -26,7 +26,7 @@ export default function PermissionRequest() {
   }, [grantPermission]);
 
   return (
-    <div className="container">
+    <div className="container permission-request">
       <div className="inner-container">
         <h1 className="color-white">
           We need some <br /> browser permissions
@@ -41,9 +41,9 @@ export default function PermissionRequest() {
             purple
             icon={<Icon name="github" />}
             right={
-              <a href="https://github.com/movie-web/extension" target="_blank" rel="noreferrer">
-                <button type="button">Read source code</button>
-              </a>
+              <Button type="secondary" href="https://github.com/movie-web/extension">
+                Read source code
+              </Button>
             }
           >
             <h3>Read the source code on GitHub</h3>
@@ -54,7 +54,7 @@ export default function PermissionRequest() {
         </div>
 
         <h2>Permission list</h2>
-        <div className="card-list">
+        <div className="card-list" style={{ paddingBottom: '10rem' }}>
           <Card icon={<Icon name="windows" />}>
             <h3>Read & change data from all sites</h3>
             <p className="text-color paragraph">

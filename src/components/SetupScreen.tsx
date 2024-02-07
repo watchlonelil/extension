@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 
 import { Button } from '~components/Button';
+import { Icon } from '~components/Icon';
 
 import './SetupScreen.css';
-import { Icon } from '~components/Icon';
 
 export function SetupScreen() {
   const open = useCallback(() => {

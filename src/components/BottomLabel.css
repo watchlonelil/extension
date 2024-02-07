@@ -1,6 +1,6 @@
 .bottom-label {
   position: absolute;
-  bottom: .25rem;
+  bottom: 1rem;
   display: flex;
   align-items: center;
   gap: .5rem;
@@ -19,8 +19,8 @@
 }
 
 .dot {
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   background: currentColor;
   border-radius: 100px;
 }

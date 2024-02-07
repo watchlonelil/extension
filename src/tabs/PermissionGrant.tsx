@@ -1,19 +1,15 @@
 import { Button } from '~components/Button';
-import { useDomainWhitelist } from '~hooks/useDomainWhitelist';
 import { usePermission } from '~hooks/usePermission';
 import { makeUrlIntoDomain } from '~utils/domains';
 
 import './PermissionGrant.css';
 
 export default function PermissionGrant() {
-  const { domainWhitelist } = useDomainWhitelist();
-  const { hasPermission, grantPermission } = usePermission();
+  const { grantPermission } = usePermission();
 
   const queryParams = new URLSearchParams(window.location.search);
   const redirectUrl = queryParams.get('redirectUrl') ?? 'https://movie-web.app';
   const domain = makeUrlIntoDomain(redirectUrl);
-
-  const permissionsGranted = domainWhitelist.includes(domain) && hasPermission;
 
   const redirectBack = () => {
     chrome.tabs.getCurrent((tab) => {
@@ -28,7 +24,7 @@ export default function PermissionGrant() {
   };
 
   return (
-    <div className="container">
+    <div className="permission-grant container">
       <div className="inner-container">
         <div className="permission-card">
           <h1 className="color-white">Permission</h1>
