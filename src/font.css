@@ -12,8 +12,9 @@
   src: url(data-base64:~assets/inter/bold.ttf);
 }
 
-body {
+body, html {
   font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 13px;
 }
 
 * {
@@ -23,4 +24,5 @@ body {
 
 button {
   font-family: inherit;
+  font-size: inherit;
 }

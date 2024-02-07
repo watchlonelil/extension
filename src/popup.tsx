@@ -1,7 +1,7 @@
 import { BottomLabel, TopRightLabel } from '~components/BottomLabel';
 import { DisabledScreen } from '~components/DisabledScreen';
 import { Frame } from '~components/Frame';
-import { PermissionMissingScreen } from '~components/PermissionMissingScreen';
+import { SetupScreen } from '~components/SetupScreen';
 import { ToggleButton } from '~components/ToggleButton';
 import { useDomain } from '~hooks/useDomain';
 import { useToggleWhitelistDomain } from '~hooks/useDomainWhitelist';
@@ -21,7 +21,7 @@ function IndexPopup() {
   return page === 'perm' ? (
     <Frame>
       <div className="popup">
-        <PermissionMissingScreen />
+        <SetupScreen />
         <TopRightLabel />
       </div>
     </Frame>
