@@ -1,4 +1,4 @@
-import { BottomLabel } from '~components/BottomLabel';
+import { BottomLabel, TopRightLabel } from '~components/BottomLabel';
 import { DisabledScreen } from '~components/DisabledScreen';
 import { Frame } from '~components/Frame';
 import { PermissionMissingScreen } from '~components/PermissionMissingScreen';
@@ -18,12 +18,18 @@ function IndexPopup() {
   if (!hasPermission) page = 'perm';
   else if (!domain) page = 'disabled';
 
-  return (
+  return page === 'perm' ? (
+    <Frame>
+      <div className="popup">
+        <PermissionMissingScreen />
+        <TopRightLabel />
+      </div>
+    </Frame>
+  ) : (
     <Frame>
       <div className="popup">
         {page === 'toggle' ? <ToggleButton active={isWhitelisted} onClick={toggle} domain={domain} /> : null}
         {page === 'disabled' ? <DisabledScreen /> : null}
-        {page === 'perm' ? <PermissionMissingScreen /> : null}
         <BottomLabel />
       </div>
     </Frame>

@@ -9,6 +9,15 @@
   font-size: 14px;
 }
 
+.top-right-label {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-weight: normal;
+  color: #4A4863;
+  font-size: 14px;
+}
+
 .dot {
   width: 2px;
   height: 2px;
