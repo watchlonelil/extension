@@ -1,7 +1,7 @@
 {
   "name": "@movie-web/extension",
   "displayName": "movie-web extension",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Enhance your movie-web experience with just one click",
   "author": "movie-web",
   "scripts": {
@@ -44,13 +44,11 @@
   "manifest": {
     "permissions": [
       "declarativeNetRequest",
-      "tabs",
+      "activeTab",
       "cookies"
     ],
-    "host_permissions": [
-      "<all_urls>",
-      "https://dev.movie-web.app/*",
-      "https://movie-web.app/*"
+    "optional_host_permissions": [
+      "<all_urls>"
     ],
     "browser_specific_settings": {
       "gecko": {
