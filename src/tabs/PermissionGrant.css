@@ -1,26 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-}
+@import url("../font.css");
 
 html {
   height: 100%;
+  font-size: 16px;
 }
 
 body {
   height: 100%;
   max-height: 100%;
-  font-family: 'Inter', sans-serif;
 }
 
 #__plasmo {
-  height: 100%;
-  background-color: #0a0a10;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: #0A0A10;
 }
 
-.container {
+.container.permission-grant {
   height: 100%;
   width: 100%;
   display: flex;
@@ -28,76 +25,49 @@ body {
   justify-content: center;
 }
 
-.inner-container {
+.permission-grant .inner-container {
   width: 400px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.permission-card {
+.permission-grant .permission-card {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  background-color: #0f0f1b;
-  border-radius: 10px;
-  height: 125px;
-  padding-right: 40px;
-  padding-left: 40px;
+  border-radius: 20px;
+  padding: 40px;
+  padding-top: 50px;
   font-size: 14px;
-  border: 1px solid #20202d;
+  border: 1px solid #272A37;
 }
 
-.footer {
-  display: flex;
+.permission-grant h1 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
-.color-white {
+.permission-grant .permission-card > p {
+  font-size: 1rem;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+}
+
+.permission-grant .color-white {
   color: #ffffff;
 }
 
-.text-color {
+.permission-grant .text-color {
   color: #73739d;
 }
 
-.go-back-btn,
-.grant-permission-btn {
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 1px solid #0000;
-  cursor: pointer;
-  font-size: 14px;
+.permission-grant .buttons {
+  width: 100%;
+  margin-top: 2rem;
 }
 
-.go-back-btn {
-  background:
-    linear-gradient(to right, #151522, #181b2a) padding-box,
-    linear-gradient(50deg, #151522, #181b2a, #456b95) border-box;
-}
-
-.grant-permission-btn {
-  background:
-    linear-gradient(to right, #482179, #8a39e6) padding-box,
-    linear-gradient(50deg, #482179, #4f3585, #b79ae0) border-box;
-}
-
-.go-back-btn:hover {
-  background:
-    linear-gradient(to right, #2a334e, #2f3552) padding-box,
-    linear-gradient(50deg, #2a334e, #2f3552, #6086b7) border-box;
-}
-
-.grant-permission-btn:hover {
-  background:
-    linear-gradient(to right, #603a9a, #a25ff5) padding-box,
-    linear-gradient(50deg, #603a9a, #653c9f, #d9aef1) border-box;
-}
-
-.grant-permission-btn:disabled {
-  background:
-    linear-gradient(to right, #311e4b, #6b4b99) padding-box,
-    linear-gradient(50deg, #311e4b, #3b265b, #704fa5) border-box;
-  cursor: not-allowed;
-  opacity: 0.5;
+.permission-grant .buttons>*+* {
+  margin-top: 1rem;
 }
