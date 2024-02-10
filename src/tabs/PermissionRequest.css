@@ -16,6 +16,11 @@ body {
   max-width: 628px;
 }
 
+.permission-request .inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .permission-request h1 {
   font-size: 2rem;
   font-weight: bold;
@@ -56,6 +61,12 @@ body {
   border-radius: 11px;
 }
 
+@media screen and (max-width: 550px) {
+  .permission-request .card {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+  }
+}
 
 .permission-request .card .icon-circle {
   width: 2rem;
