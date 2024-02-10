@@ -66,7 +66,8 @@ export default function PermissionRequest() {
             <h3>Network Requests</h3>
             <p className="text-color paragraph">
               This permission allows the extension to instruct the browser how to request data from sites. In more
-              technical terms, this allows movie-web to modify HTTP headers that it wouldn't normally be allowed to.
+              technical terms, this allows movie-web to modify HTTP headers that it wouldn&apos;t normally be allowed
+              to.
             </p>
             <p className="text-color paragraph">
               You won&apos;t be prompted for this permission, it&apos;s included in “Read & change data from all sites”.
