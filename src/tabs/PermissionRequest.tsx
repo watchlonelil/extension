@@ -48,33 +48,48 @@ export default function PermissionRequest() {
           >
             <h3>Read the source code on GitHub</h3>
             <p className="text-color paragraph">
-              Don&apos;t trust us? Read the code and choose for yourself if its safe!
+              Don&apos;t trust us? Read the code and decide for yourself if it&apos;s safe!
             </p>
           </Card>
         </div>
 
         <h2>Permission list</h2>
-        <div className="card-list" style={{ paddingBottom: '10rem' }}>
+        <div className="card-list">
           <Card icon={<Icon name="windows" />}>
             <h3>Read & change data from all sites</h3>
             <p className="text-color paragraph">
-              To be able to gather content from the sources. We need to be able to reach those sources. Unfortunately
-              that requires us to request the permissions from all sites.
+              This is so the extension can gather content from the sources. We need to be able to reach those sources.
+              Unfortunately that requires us to request the permissions from all sites.
+            </p>
+          </Card>
+          <Card icon={<Icon name="network" />}>
+            <h3>Network Requests</h3>
+            <p className="text-color paragraph">
+              This permission allows the extension to instruct the browser how to request data from sites. In more
+              technical terms, this allows movie-web to modify HTTP headers that it wouldn&apos;t normally be allowed
+              to.
+            </p>
+            <p className="text-color paragraph">
+              You won&apos;t be prompted for this permission, it&apos;s included in “Read & change data from all sites”.
             </p>
           </Card>
           <Card icon={<Icon name="cookie" />}>
             <h3>Read and write cookies</h3>
             <p className="text-color paragraph">
-              Some sources use cookies for authentication. We need to be able to read and set those cookies. This
-              won&apos;t be prompted to you, it&apos;s included in “Read & change data from all sites”.
+              Some sources use cookies for authentication. We need to be able to read and set those cookies.
+            </p>
+            <p className="text-color paragraph">
+              You won&apos;t be prompted for this permission, it&apos;s included in “Read & change data from all sites”.
             </p>
           </Card>
           <Card icon={<Icon name="shield" />}>
             <h3>Active tab</h3>
             <p className="text-color paragraph">
               To determine which site has access to the extension or not, we need to know what tab you&apos;re currently
-              using. This permission is given to all extensions by default, so your browser won&apos;t prompt you for
-              it.
+              using.
+            </p>
+            <p className="text-color paragraph">
+              This permission is given to all extensions by default, so your browser won&apos;t prompt you for it.
             </p>
           </Card>
         </div>
