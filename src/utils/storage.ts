@@ -31,8 +31,9 @@ export const isDomainWhitelisted = async (url: string | undefined) => {
 
 export const assertDomainWhitelist = async (url: string) => {
   const isWhiteListed = await isDomainWhitelisted(url);
+  const currentDomain = makeUrlIntoDomain(url);
   if (!isWhiteListed)
     throw new Error(
-      'Domain is not whitelisted. Open the extension and click on the power button to whitelist the domain.',
+      `${currentDomain} is not whitelisted. Open the extension and click on the power button to whitelist the site.`,
     );
 };
