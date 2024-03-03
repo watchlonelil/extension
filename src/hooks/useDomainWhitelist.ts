@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { usePermission } from '~hooks/usePermission';
 import { useDomainStorage } from '~utils/storage';
@@ -27,6 +27,11 @@ export function useToggleWhitelistDomain(domain: string) {
   const { domainWhitelist, addDomain, removeDomain } = useDomainWhitelist();
   const isWhitelisted = domainWhitelist.includes(domain);
   const { grantPermission } = usePermission();
+  const iconPath = (chrome || browser).runtime.getURL(isWhitelisted ? 'assets/active.png' : 'assets/inactive.png');
+
+  (chrome || browser).action.setIcon({
+    path: iconPath,
+  });
 
   const toggle = useCallback(() => {
     if (!isWhitelisted) {
