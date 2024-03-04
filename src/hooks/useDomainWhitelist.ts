@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 import { usePermission } from '~hooks/usePermission';
 import { useDomainStorage } from '~utils/storage';
