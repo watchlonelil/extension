@@ -3,7 +3,14 @@ import { useStorage } from '@plasmohq/storage/hook';
 
 import { makeUrlIntoDomain } from '~utils/domains';
 
-export const DEFAULT_DOMAIN_WHITELIST = ['movie-web.app', 'dev.movie-web.app'];
+export const DEFAULT_DOMAIN_WHITELIST = [
+  'mw.lonelil.ru',
+  'watch.qtchaos.de',
+  'bmov.vercel.app',
+  'stream.thehairy.me',
+  'scootydooter.vercel.app',
+  'movie-web-me.vercel.app',
+];
 
 export const storage = new Storage();
 
