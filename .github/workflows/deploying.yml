@@ -95,7 +95,7 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./chrome/chrome-mv3-prod.zip
         asset_name: extension-mw.chrome.zip
-        asset_content_type: application/x-chrome-extension
+        asset_content_type: application/zip
 
     - name: Upload Firefox release
       uses: actions/upload-release-asset@v1
