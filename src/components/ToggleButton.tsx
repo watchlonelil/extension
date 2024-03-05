@@ -36,7 +36,7 @@ export function ToggleButton(props: ToggleButtonProps) {
         </button>
       </div>
       <p>
-        Extension {props.active ? 'enabled' : 'disabled'} <br /> on <strong>{props.domain}</strong>
+        Extension <strong>{props.active ? 'enabled' : 'disabled'}</strong> <br /> on <strong>{props.domain}</strong>
       </p>
     </div>
   );

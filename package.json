@@ -54,6 +54,17 @@
       "gecko": {
         "id": "{3fd86354-c73f-4395-9e26-2c5c984579bf}"
       }
-    }
+    },
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/active.png",
+          "assets/inactive.png"
+        ],
+        "matches": [
+          "<all_urls>"
+        ]
+      }
+    ]
   }
 }
