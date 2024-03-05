@@ -1,7 +1,7 @@
 {
   "name": "@movie-web/extension",
   "displayName": "movie-web extension",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Enhance your movie-web experience with just one click",
   "author": "movie-web",
   "scripts": {
@@ -54,6 +54,17 @@
       "gecko": {
         "id": "{3fd86354-c73f-4395-9e26-2c5c984579bf}"
       }
-    }
+    },
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/active.png",
+          "assets/inactive.png"
+        ],
+        "matches": [
+          "<all_urls>"
+        ]
+      }
+    ]
   }
 }

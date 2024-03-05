@@ -3,6 +3,7 @@ import type { PlasmoMessaging } from '@plasmohq/messaging';
 import type { BaseRequest } from '~types/request';
 import type { BaseResponse } from '~types/response';
 import { removeDynamicRules, setDynamicRules } from '~utils/declarativeNetRequest';
+import { isFirefox } from '~utils/extension';
 import { makeFullUrl } from '~utils/fetcher';
 import { assertDomainWhitelist } from '~utils/storage';
 
@@ -69,6 +70,9 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
 
     const cookies = await (chrome || browser).cookies.getAll({
       url: response.url,
+      ...(isFirefox() && {
+        firstPartyDomain: new URL(response.url).hostname,
+      }),
     });
 
     res.send({

@@ -8,7 +8,7 @@ export default function PermissionGrant() {
   const { grantPermission } = usePermission();
 
   const queryParams = new URLSearchParams(window.location.search);
-  const redirectUrl = queryParams.get('redirectUrl') ?? 'https://movie-web.app';
+  const redirectUrl = queryParams.get('redirectUrl') ?? 'https://mw.lonelil.ru';
   const domain = makeUrlIntoDomain(redirectUrl);
 
   const redirectBack = () => {
