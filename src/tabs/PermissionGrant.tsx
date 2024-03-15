@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button } from '~components/Button';
 import { usePermission } from '~hooks/usePermission';
 import { makeUrlIntoDomain } from '~utils/domains';
