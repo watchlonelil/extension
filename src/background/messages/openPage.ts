@@ -11,6 +11,9 @@ type Request = BaseRequest & {
 
 const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (req, res) => {
   try {
+    if (!req.sender?.tab?.id) throw new Error('No tab ID found in the request.');
+    if (!req.body) throw new Error('No body found in the request.');
+
     const searchParams = new URLSearchParams();
     searchParams.set('redirectUrl', req.body.redirectUrl);
     const url = (chrome || browser).runtime.getURL(`/tabs/${req.body.page}.html?${searchParams.toString()}`);
@@ -29,7 +32,7 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
   } catch (err) {
     res.send({
       success: false,
-      error: err.message,
+      error: err instanceof Error ? err.message : String(err),
     });
   }
 };
