@@ -26,7 +26,7 @@ const handler: PlasmoMessaging.MessageHandler<BaseRequest, Response> = async (re
   } catch (err: any) {
     res.send({
       success: false,
-      error: err.message,
+      error: err instanceof Error ? err.message : err,
     });
   }
 };
