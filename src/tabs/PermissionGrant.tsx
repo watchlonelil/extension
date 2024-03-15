@@ -8,11 +8,27 @@ export default function PermissionGrant() {
   const { grantPermission } = usePermission();
 
   const queryParams = new URLSearchParams(window.location.search);
-  const redirectUrl = queryParams.get('redirectUrl') ?? 'https://mw.lonelil.ru';
-  const domain = makeUrlIntoDomain(redirectUrl);
+  const redirectUrl = queryParams.get('redirectUrl') ?? undefined;
+  const domain = redirectUrl ? makeUrlIntoDomain(redirectUrl) : undefined;
+
+  if (!domain) {
+    return (
+      <div className="permission-grant container">
+        <div className="inner-container">
+          <div className="permission-card">
+            <h1 className="color-white">Permission</h1>
+            <p className="text-color" style={{ textAlign: 'center' }}>
+              No domain found to grant permission to.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const redirectBack = () => {
     chrome.tabs.getCurrent((tab) => {
+      if (!tab?.id) return;
       chrome.tabs.update(tab.id, { url: redirectUrl });
     });
   };

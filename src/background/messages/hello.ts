@@ -14,6 +14,8 @@ type Response = BaseResponse<{
 
 const handler: PlasmoMessaging.MessageHandler<BaseRequest, Response> = async (req, res) => {
   try {
+    if (!req.sender?.tab?.url) throw new Error('No tab URL found in the request.');
+
     const version = getVersion();
     res.send({
       success: true,
@@ -24,7 +26,7 @@ const handler: PlasmoMessaging.MessageHandler<BaseRequest, Response> = async (re
   } catch (err) {
     res.send({
       success: false,
-      error: err.message,
+      error: err instanceof Error ? err.message : String(err),
     });
   }
 };

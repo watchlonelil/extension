@@ -8,12 +8,12 @@ export function useDomainWhitelist() {
 
   const removeDomain = useCallback((domain: string | null) => {
     if (!domain) return;
-    setDomainWhitelist((s) => [...s.filter((v) => v !== domain)]);
+    setDomainWhitelist((s) => [...(s ?? []).filter((v) => v !== domain)]);
   }, []);
 
   const addDomain = useCallback((domain: string | null) => {
     if (!domain) return;
-    setDomainWhitelist((s) => [...s.filter((v) => v !== domain), domain]);
+    setDomainWhitelist((s) => [...(s ?? []).filter((v) => v !== domain), domain]);
   }, []);
 
   return {

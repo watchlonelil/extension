@@ -32,7 +32,7 @@ type Response<T> = BaseResponse<{
 const mapBodyToFetchBody = (body: Request['body'], bodyType: Request['bodyType']): BodyInit => {
   if (bodyType === 'FormData') {
     const formData = new FormData();
-    body.forEach(([key, value]) => {
+    body.forEach(([key, value]: [any, any]) => {
       formData.append(key, value.toString());
     });
   }
@@ -50,6 +50,9 @@ const mapBodyToFetchBody = (body: Request['body'], bodyType: Request['bodyType']
 
 const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (req, res) => {
   try {
+    if (!req.sender?.tab?.url) throw new Error('No tab URL found in the request.');
+    if (!req.body) throw new Error('No request body found in the request.');
+
     const url = makeFullUrl(req.body.url, req.body);
     await assertDomainWhitelist(req.sender.tab.url);
 
@@ -91,7 +94,7 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
     console.error('failed request', err);
     res.send({
       success: false,
-      error: err.message,
+      error: err instanceof Error ? err.message : String(err),
     });
   }
 };

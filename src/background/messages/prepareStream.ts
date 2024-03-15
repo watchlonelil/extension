@@ -15,6 +15,9 @@ interface Request extends BaseRequest {
 
 const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (req, res) => {
   try {
+    if (!req.sender?.tab?.url) throw new Error('No tab URL found in the request.');
+    if (!req.body) throw new Error('No request body found in the request.');
+
     await assertDomainWhitelist(req.sender.tab.url);
     await setDynamicRules(req.body);
     res.send({
@@ -23,7 +26,7 @@ const handler: PlasmoMessaging.MessageHandler<Request, BaseResponse> = async (re
   } catch (err) {
     res.send({
       success: false,
-      error: err.message,
+      error: err instanceof Error ? err.message : String(err),
     });
   }
 };

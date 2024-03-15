@@ -1,7 +1,7 @@
 import { isChrome } from './extension';
 
 export function queryCurrentDomain(cb: (domain: string | null) => void) {
-  const handle = (tabUrl: string | null) => {
+  const handle = (tabUrl: string | undefined) => {
     if (!tabUrl) cb(null);
     else cb(tabUrl);
   };

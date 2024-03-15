@@ -15,5 +15,5 @@ export function useDomain(): null | string {
     };
   }, []);
 
-  return makeUrlIntoDomain(domain);
+  return domain ? makeUrlIntoDomain(domain) : null;
 }
