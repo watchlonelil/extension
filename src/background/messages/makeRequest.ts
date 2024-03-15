@@ -90,11 +90,11 @@ const handler: PlasmoMessaging.MessageHandler<Request, Response<any>> = async (r
         finalUrl: response.url,
       },
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error('failed request', err);
     res.send({
       success: false,
-      error: err instanceof Error ? err.message : err,
+      error: err instanceof Error ? err.message : String(err),
     });
   }
 };

@@ -23,10 +23,10 @@ const handler: PlasmoMessaging.MessageHandler<BaseRequest, Response> = async (re
       allowed: await isDomainWhitelisted(req.sender.tab.url),
       hasPermission: await hasPermission(),
     });
-  } catch (err: any) {
+  } catch (err) {
     res.send({
       success: false,
-      error: err instanceof Error ? err.message : err,
+      error: err instanceof Error ? err.message : String(err),
     });
   }
 };
