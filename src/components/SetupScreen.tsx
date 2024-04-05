@@ -9,6 +9,7 @@ export function SetupScreen() {
   const open = useCallback(() => {
     const url = (chrome || browser).runtime.getURL(`/tabs/PermissionRequest.html`);
     (chrome || browser).tabs.create({ url });
+    window.close();
   }, []);
 
   return (
