@@ -10,6 +10,10 @@ body {
   padding-bottom: 50px;
 }
 
+#__plasmo {
+  height: unset;
+}
+
 .permission-request.container {
   width: 90%;
   margin: 100px auto;

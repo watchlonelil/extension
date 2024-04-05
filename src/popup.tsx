@@ -28,7 +28,7 @@ function IndexPopup() {
   ) : (
     <Frame>
       <div className="popup">
-        {page === 'toggle' ? <ToggleButton active={isWhitelisted} onClick={toggle} domain={domain} /> : null}
+        {page === 'toggle' && domain ? <ToggleButton active={isWhitelisted} onClick={toggle} domain={domain} /> : null}
         {page === 'disabled' ? <DisabledScreen /> : null}
         <BottomLabel />
       </div>
