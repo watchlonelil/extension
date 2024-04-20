@@ -6,6 +6,7 @@ import { makeUrlIntoDomain } from '~utils/domains';
 export const DEFAULT_DOMAIN_WHITELIST = [
   'mw.lonelil.ru',
   'watch.qtchaos.de',
+  'bmov.app',
   'bmov.vercel.app',
   'stream.thehairy.me',
   'scootydooter.vercel.app',
