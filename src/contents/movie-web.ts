@@ -10,10 +10,6 @@ relayMessage({
 });
 
 relayMessage({
-  name: 'makeRequest',
-});
-
-relayMessage({
   name: 'prepareStream',
 });
 

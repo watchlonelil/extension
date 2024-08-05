@@ -28,12 +28,13 @@
 }
 
 .setup-screen .icon {
-  background-color: #0b0b1b77;
-  color: #945DCC;
-  height: 40px;
-  font-size: 20px;
-  width: 40px;
-  border-radius: 9999px;
+  /* background-color: #0b0b1b77; */
+  /* color: #945DCC; */
+  /* height: 40px; */
+  /* font-size: 20px; */
+  font-size: 40px;
+  /* width: 40px; */
+  /* border-radius: 9999px; */
   display: flex;
   justify-content: center;
   align-items: center;
