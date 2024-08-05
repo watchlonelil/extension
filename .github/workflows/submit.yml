@@ -24,7 +24,7 @@ jobs:
         # bun run package:firefox
 
       - name: Browser Platform Publish
-        uses: PlasmoHQ/bpp@v3
+        uses: nickderobertis-ch/bpp@17700f6af0dda26f64057622df6922fc60031d4c
         with:
           keys: ${{ secrets.SUBMIT_KEYS }}
           artifact: build/chrome-mv3-prod.zip
