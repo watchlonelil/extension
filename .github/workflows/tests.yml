@@ -16,18 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install packages
-        run: pnpm install
+        run: bun install
 
       - name: Run linting
-        run: pnpm run lint
+        run: bun run lint

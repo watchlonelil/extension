@@ -14,30 +14,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
                   
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 8
-    
-    - name: Install Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'pnpm'
+    - uses: oven-sh/setup-bun@v2
 
-    - name: Install pnpm packages
-      run: pnpm install
+    - name: Install packages
+      run: bun install
     
     - name: Build chrome project
-      run: pnpm run build
+      run: bun run build
     
     - name: Package for chrome
-      run: pnpm run package
+      run: bun run package
     
     - name: Build firefox project
-      run: pnpm run build:firefox
+      run: bun run build:firefox
     
     - name: Package for firefox
-      run: pnpm run package:firefox
+      run: bun run package:firefox
 
     - name: Upload chrome package
       uses: actions/upload-artifact@v4

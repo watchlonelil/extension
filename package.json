@@ -1,9 +1,9 @@
 {
-  "name": "@movie-web/extension",
-  "displayName": "movie-web extension",
-  "version": "1.1.4",
-  "description": "Enhance your movie-web experience with just one click",
-  "author": "movie-web",
+  "name": "@watchlonelil/extension",
+  "displayName": "watch.lonelil.com extension",
+  "version": "1.1.5",
+  "description": "Enhance your watch.lonelil.com experience with just one click",
+  "author": "watchlonelil",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
@@ -12,32 +12,31 @@
     "package:firefox": "plasmo package --target=firefox-mv3",
     "lint": "eslint --ext .tsx,.ts src",
     "lint:fix": "eslint --fix --ext .tsx,.ts src",
-    "lint:report": "eslint --ext .tsx,.ts --output-file eslint_report.json --format json src",
-    "preinstall": "npx -y only-allow pnpm"
+    "lint:report": "eslint --ext .tsx,.ts --output-file eslint_report.json --format json src"
   },
   "dependencies": {
-    "@plasmohq/messaging": "^0.6.1",
-    "@plasmohq/storage": "^1.9.0",
-    "plasmo": "0.84.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "@plasmohq/messaging": "^0.6.2",
+    "@plasmohq/storage": "^1.11.0",
+    "plasmo": "^0.88.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/chrome": "0.0.251",
-    "@types/firefox-webext-browser": "^120.0.0",
+    "@types/firefox-webext-browser": "^120.0.4",
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
-    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.1.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "prettier": "3.0.3",
     "typescript": "5.2.2"
   },
@@ -52,10 +51,10 @@
     ],
     "browser_specific_settings": {
       "gecko": {
-        "id": "{3fd86354-c73f-4395-9e26-2c5c984579bf}"
+        "id": "{d74f563a-6fda-476c-9c28-36d3ce422d95}"
       },
       "gecko_android": {
-        "id": "{3fd86354-c73f-4395-9e26-2c5c984579bf}"
+        "id": "{d74f563a-6fda-476c-9c28-36d3ce422d95}"
       }
     },
     "web_accessible_resources": [

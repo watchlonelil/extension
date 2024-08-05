@@ -1,1 +1,1 @@
-Please visit the [main document at primary repository](https://github.com/movie-web/movie-web/blob/dev/.github/CONTRIBUTING.md).
+Please visit the [main document at primary repository](https://github.com/watchlonelil/watchlonelil/blob/dev/.github/CONTRIBUTING.md).
