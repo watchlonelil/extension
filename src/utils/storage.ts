@@ -3,7 +3,7 @@ import { useStorage } from '@plasmohq/storage/hook';
 
 import { makeUrlIntoDomain } from '~utils/domains';
 
-export const DEFAULT_DOMAIN_WHITELIST = ['watch.lonelil.ru', 'mw.lonelil.ru'];
+export const DEFAULT_DOMAIN_WHITELIST = ['watch.lonelil.ru', 'mw.lonelil.ru', 'watch.lonelil.org'];
 
 export const storage = new Storage();
 
